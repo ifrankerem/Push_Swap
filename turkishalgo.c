@@ -1,0 +1,170 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   turkishalgo.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/23 01:25:02 by iarslan           #+#    #+#             */
+/*   Updated: 2025/02/23 23:53:13 by iarslan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "pushswap.h"
+
+void	target_node(t_stack *a, t_stack *b)
+{
+	int		best_match;
+	t_stack	*a_current;
+
+	best_match = 2147483647;
+	a_current = a;
+	while (b)
+	{
+		while (a_current)
+		{
+			if ((b->value < a_current->value) && a_current->value < best_match)
+			{
+				best_match = a_current->value;
+				b->target_node = a_current;
+			}
+			a_current = a_current->next;
+		}
+		if (best_match == 2147483647)
+			b->target_node = find_smallest_node(a);
+		b = b->next;
+	}
+}
+
+void	set_current_pos(t_stack *root)
+// median hesabı nı .h dosyasının içindekine atcaz 1-0 diye
+{
+	int len;
+	int i;
+	len = ft_lstsize2(root);
+	i = 0;
+	while (root)
+	{
+		root->current_pos = i;
+		if (i <= (len / 2))
+			root->is_above = 1;
+		else
+			root->is_above = 0;
+		root = root->next;
+		i++;
+	}
+}
+
+void	set_price(t_stack *a, t_stack *b)
+// hem target node hem de b içindeki price ı hesaplama
+{
+	int len_a;
+	int len_b;
+
+	len_a = ft_lstsize2(a);
+	len_b = ft_lstsize2(b);
+	while (b)
+	{
+		if (b->is_above == 1)
+			b->pushprice = b->current_pos;
+		else
+			b->pushprice = len_b - b->current_pos;
+		if (b->target_node->is_above == 1)
+			b->pushprice = b->pushprice + b->target_node->current_pos;
+		else
+			b->pushprice = b->pushprice + (len_a - b->target_node->current_pos);
+		b = b->next;
+	}
+}
+
+void	set_cheapest(t_stack *b)
+// b stackinin içinde en ucuzu bul onun cheapest değerini 1 yap,bunun nedeni de her seferinde sstackleri bozman
+{
+	int best_match_value = 2147483647;
+
+	t_stack *cheapest_node;
+	while (b)
+	{
+		if (b->pushprice < best_match_value)
+		{
+			best_match_value = b->pushprice;
+			cheapest_node = b;
+		}
+		b = b->next;
+		cheapest_node->is_cheapest = 1;
+	}
+}
+t_stack	*return_cheapest_node(t_stack *b)
+{
+	t_stack	*cheapest;
+
+	cheapest = b;
+	while (cheapest)
+	{
+		if (cheapest->is_cheapest == 1)
+			return (cheapest);
+		cheapest = cheapest->next;
+	}
+	return (cheapest);
+}
+
+void	move_nodes(t_stack **a, t_stack **b)
+// bu ucuz hamleye göre hamleleri yaptır.
+{
+	t_stack *cheapest;
+	cheapest = return_cheapest_node(*b);
+	if (cheapest->is_above && cheapest->target_node->is_above)
+		rotate_both(a, b, cheapest);
+	else if (!(cheapest->is_above) && !(cheapest->is_above))
+		reverse_rotate_both(a, b, cheapest);
+	finish_rotation(a, cheapest, 'a');
+	finish_rotation(b, cheapest, 'b');
+}
+
+void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
+// buda a'daki target node un ve b deki cheapest node un konumlarına göre aynı anda rotate edilebilir ise edilsin hamle azalsın diye yapılmıs bir fonksiyon ama above median için
+{
+	while (((*b) != cheapest_node) && (*a) != cheapest_node->target_node)
+		rr(*a, *b);
+	set_current_pos(*a);
+	set_current_pos(*b);
+}
+void	reverse_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
+{
+	while (((*b) != cheapest_node) && (*a) != cheapest_node->target_node)
+		rrr(*a, *b);
+	set_current_pos(*a);
+	set_current_pos(*b);
+}
+
+void	finish_rotation(t_stack **stack, t_stack *cheapest_node,
+		char stack_name)
+{
+	if (stack_name == 'a')
+	{
+		while ((*stack) != cheapest_node->target_node)
+		{
+			if (cheapest_node->target_node->is_above == 1)
+				ra(*stack);
+			else
+				rra(*stack);
+		}
+	}
+	else if (stack_name == 'b')
+	{
+		while ((*stack) != cheapest_node)
+		{
+			if (cheapest_node->is_above == 1)
+				rb(*stack);
+			else
+				rrb(*stack);
+		}
+	}
+}
+void	re_init_nodes(t_stack *a, t_stack *b)
+{
+	set_current_pos(a);
+	set_current_pos(b);
+	target_node(a, b);
+	set_cheapest(b);
+}
