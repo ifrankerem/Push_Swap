@@ -27,18 +27,19 @@ void			ft_lstadd_front2(t_stack **lst, t_stack *new);
 t_stack			*ft_lstnew2(int content);
 void			ft_free_argv(char **argv);
 int				stack_sorted(t_stack *x);
-void			sa(t_stack *a);
-void			sb(t_stack *b);
-void			ss(t_stack *a, t_stack *b);
+void			sx(t_stack **a);
+void			sb(t_stack **b);
+void			sa(t_stack **a);
+void			ss(t_stack **a, t_stack **b);
 void			pa(t_stack **a, t_stack **b);
 void			pb(t_stack **a, t_stack **b);
-void			ra(t_stack *a);
-void			rb(t_stack *b);
-void			rr(t_stack *a, t_stack *b);
-void			rrx(t_stack *a);
-void			rra(t_stack *a);
-void			rrb(t_stack *b);
-void			rrr(t_stack *a, t_stack *b);
+void			ra(t_stack **a);
+void			rb(t_stack **b);
+void			rr(t_stack **a, t_stack **b);
+void			rrx(t_stack **a);
+void			rra(t_stack **a);
+void			rrb(t_stack **b);
+void			rrr(t_stack **a, t_stack **b);
 void			three(t_stack **a);
 int				find_biggest(t_stack *a);
 t_stack			*find_smallest_node(t_stack *a);
@@ -56,4 +57,6 @@ void			reverse_rotate_both(t_stack **a, t_stack **b,
 void			finish_rotation(t_stack **stack, t_stack *cheapest_node,
 					char stack_name);
 void			re_init_nodes(t_stack *a, t_stack *b);
+void			ft_lstadd_back2(t_stack **lst, t_stack *new);
+
 #endif

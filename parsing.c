@@ -6,7 +6,7 @@
 /*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 19:52:31 by iarslan           #+#    #+#             */
-/*   Updated: 2025/02/20 21:32:27 by iarslan          ###   ########.fr       */
+/*   Updated: 2025/02/24 03:33:38 by iarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_args(t_stack **a, char *argv[])
 		node = ft_lstnew2(number);
 		if (!node)
 			ft_error(a);
-		ft_lstadd_front2(a, node);
+		ft_lstadd_back2(a, node);
 		i++;
 	}
 }

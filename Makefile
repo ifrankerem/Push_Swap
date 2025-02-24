@@ -5,7 +5,7 @@ OBJS = error.o main.o moves.o moves2.o stack_utils.o utils.o parsing.o pushswapp
 
 LIBFT = libft/libft.a
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 all: $(NAME)
 

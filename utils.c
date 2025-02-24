@@ -6,7 +6,7 @@
 /*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:50:26 by iarslan           #+#    #+#             */
-/*   Updated: 2025/02/23 23:54:20 by iarslan          ###   ########.fr       */
+/*   Updated: 2025/02/24 03:35:56 by iarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,20 @@ void	ft_lstadd_front2(t_stack **lst, t_stack *new)
 	}
 	new->next = *lst;
 	*lst = new;
+}
+void	ft_lstadd_back2(t_stack **lst, t_stack *new)
+{
+	t_stack	*current;
+
+	if (!new || !lst)
+		return ;
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
+	}
+	current = *lst;
+	while (current->next)
+		current = current->next;
+	current->next = new;
 }

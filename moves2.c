@@ -1,92 +1,63 @@
 #include "pushswap.h"
 
-void	ra(t_stack *a)
+void	rx(t_stack **a)
 {
-	int		first;
-	t_stack	*temp;
+	t_stack	*first;
+	t_stack	*last;
 
-	first = a->value;
-	temp = a;
-	while (temp->next)
-	{
-		temp->value = temp->next->value;
-		temp = temp->next;
-	}
-	temp->value = first;
-	write(1, "ra\n", 3);
+	first = *a;
+	last = *a;
+	(*a) = (*a)->next;
+	while (last->next)
+		last = last->next;
+	first->next = NULL;
+	last->next = first;
 }
-void	rb(t_stack *b)
+void	rb(t_stack **b)
 {
-	int		first;
-	t_stack	*temp;
-
-	first = b->value;
-	temp = b;
-	while (temp->next)
-	{
-		temp->value = temp->next->value;
-		temp = temp->next;
-	}
-	temp->value = first;
+	rx(b);
 	write(1, "rb\n", 3);
 }
-void	rr(t_stack *a, t_stack *b)
+void	ra(t_stack **a)
 {
-	int		first;
-	t_stack	*temp;
-
-	first = a->value;
-	temp = a;
-	while (temp->next)
-	{
-		temp->value = temp->next->value;
-		temp = temp->next;
-	}
-	temp->value = first;
-	first = b->value;
-	temp = b;
-	while (temp->next)
-	{
-		temp->value = temp->next->value;
-		temp = temp->next;
-	}
-	temp->value = first;
+	rx(a);
+	write(1, "ra\n", 3);
+}
+void	rr(t_stack **a, t_stack **b)
+{
+	rx(a);
+	rx(b);
 	write(1, "rr\n", 3);
 }
 
-void	rrx(t_stack *a)
+void	rrx(t_stack **a)
 {
-	t_stack	*temp;
-	int		last_value;
-	t_stack	*prev;
+	t_stack	*second_last;
+	t_stack	*last;
 
-	if (!a || !a->next)
-		return ;
-	temp = a;
-	while (temp->next)
-		temp = temp->next;
-	last_value = temp->value;
-	while (temp != a)
+	second_last = NULL;
+	last = *a;
+	second_last->next = NULL;
+	while (last->next)
 	{
-		prev = a;
-		while (prev->next != temp)
-			prev = prev->next;
-		temp->value = prev->value;
-		temp = prev;
+		second_last = last;
+		last = last->next;
 	}
-	a->value = last_value;
+	second_last->next = NULL;
+	last->next = *a;
+	*a = last;
 }
-void	rra(t_stack *a)
+void	rra(t_stack **a)
 {
 	rrx(a);
 	write(1, "rra\n", 4);
 }
-void	rrb(t_stack *b)
+void	rrb(t_stack **b)
 {
 	rrx(b);
 	write(1, "rrb\n", 4);
 }
-void	rrr(t_stack *a, t_stack *b)
+void	rrr(t_stack **a, t_stack **b)
 {
 	rrx(a);
 	rrx(b);

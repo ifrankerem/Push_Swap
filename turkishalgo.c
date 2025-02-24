@@ -6,7 +6,7 @@
 /*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 01:25:02 by iarslan           #+#    #+#             */
-/*   Updated: 2025/02/23 23:53:13 by iarslan          ###   ########.fr       */
+/*   Updated: 2025/02/24 05:47:00 by iarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,14 +125,14 @@ void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
 // buda a'daki target node un ve b deki cheapest node un konumlarına göre aynı anda rotate edilebilir ise edilsin hamle azalsın diye yapılmıs bir fonksiyon ama above median için
 {
 	while (((*b) != cheapest_node) && (*a) != cheapest_node->target_node)
-		rr(*a, *b);
+		rr(a, b);
 	set_current_pos(*a);
 	set_current_pos(*b);
 }
 void	reverse_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
 {
 	while (((*b) != cheapest_node) && (*a) != cheapest_node->target_node)
-		rrr(*a, *b);
+		rrr(a, b);
 	set_current_pos(*a);
 	set_current_pos(*b);
 }
@@ -145,9 +145,9 @@ void	finish_rotation(t_stack **stack, t_stack *cheapest_node,
 		while ((*stack) != cheapest_node->target_node)
 		{
 			if (cheapest_node->target_node->is_above == 1)
-				ra(*stack);
+				ra(stack);
 			else
-				rra(*stack);
+				rra(stack);
 		}
 	}
 	else if (stack_name == 'b')
@@ -155,9 +155,9 @@ void	finish_rotation(t_stack **stack, t_stack *cheapest_node,
 		while ((*stack) != cheapest_node)
 		{
 			if (cheapest_node->is_above == 1)
-				rb(*stack);
+				rb(stack);
 			else
-				rrb(*stack);
+				rrb(stack);
 		}
 	}
 }
