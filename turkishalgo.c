@@ -6,7 +6,7 @@
 /*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 01:25:02 by iarslan           #+#    #+#             */
-/*   Updated: 2025/02/24 05:47:00 by iarslan          ###   ########.fr       */
+/*   Updated: 2025/02/25 16:38:22 by iarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,44 +68,44 @@ void	set_price(t_stack *a, t_stack *b)
 		if (b->is_above == 1)
 			b->pushprice = b->current_pos;
 		else
-			b->pushprice = len_b - b->current_pos;
+			b->pushprice = len_b - (b->current_pos);
 		if (b->target_node->is_above == 1)
 			b->pushprice = b->pushprice + b->target_node->current_pos;
 		else
-			b->pushprice = b->pushprice + (len_a - b->target_node->current_pos);
+			b->pushprice = b->pushprice + (len_a
+					- (b->target_node->current_pos));
 		b = b->next;
 	}
 }
 
 void	set_cheapest(t_stack *b)
-// b stackinin içinde en ucuzu bul onun cheapest değerini 1 yap,bunun nedeni de her seferinde sstackleri bozman
 {
-	int best_match_value = 2147483647;
+	int		best_match_value;
+	t_stack	*cheapest_node;
 
-	t_stack *cheapest_node;
+	best_match_value = 2147483647;
+	cheapest_node = NULL;
 	while (b)
 	{
+		b->is_cheapest = 0;
 		if (b->pushprice < best_match_value)
 		{
 			best_match_value = b->pushprice;
 			cheapest_node = b;
 		}
 		b = b->next;
-		cheapest_node->is_cheapest = 1;
 	}
+	cheapest_node->is_cheapest = 1;
 }
 t_stack	*return_cheapest_node(t_stack *b)
 {
-	t_stack	*cheapest;
-
-	cheapest = b;
-	while (cheapest)
+	while (b)
 	{
-		if (cheapest->is_cheapest == 1)
-			return (cheapest);
-		cheapest = cheapest->next;
+		if (b->is_cheapest == 1)
+			return (b);
+		b = b->next;
 	}
-	return (cheapest);
+	return (NULL);
 }
 
 void	move_nodes(t_stack **a, t_stack **b)
@@ -117,8 +117,9 @@ void	move_nodes(t_stack **a, t_stack **b)
 		rotate_both(a, b, cheapest);
 	else if (!(cheapest->is_above) && !(cheapest->is_above))
 		reverse_rotate_both(a, b, cheapest);
-	finish_rotation(a, cheapest, 'a');
+	finish_rotation(a, cheapest->target_node, 'a');
 	finish_rotation(b, cheapest, 'b');
+	pa(a, b);
 }
 
 void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
@@ -137,14 +138,13 @@ void	reverse_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
 	set_current_pos(*b);
 }
 
-void	finish_rotation(t_stack **stack, t_stack *cheapest_node,
-		char stack_name)
+void	finish_rotation(t_stack **stack, t_stack *top_node, char stack_name)
 {
 	if (stack_name == 'a')
 	{
-		while ((*stack) != cheapest_node->target_node)
+		while ((*stack) != top_node)
 		{
-			if (cheapest_node->target_node->is_above == 1)
+			if (top_node->is_above == 1)
 				ra(stack);
 			else
 				rra(stack);
@@ -152,9 +152,9 @@ void	finish_rotation(t_stack **stack, t_stack *cheapest_node,
 	}
 	else if (stack_name == 'b')
 	{
-		while ((*stack) != cheapest_node)
+		while ((*stack) != top_node)
 		{
-			if (cheapest_node->is_above == 1)
+			if (top_node->is_above == 1)
 				rb(stack);
 			else
 				rrb(stack);
@@ -166,5 +166,6 @@ void	re_init_nodes(t_stack *a, t_stack *b)
 	set_current_pos(a);
 	set_current_pos(b);
 	target_node(a, b);
+	set_price(a, b);
 	set_cheapest(b);
 }

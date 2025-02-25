@@ -6,7 +6,7 @@
 /*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 00:24:51 by iarslan           #+#    #+#             */
-/*   Updated: 2025/02/24 05:45:31 by iarslan          ###   ########.fr       */
+/*   Updated: 2025/02/25 16:47:55 by iarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	stack_sorted(t_stack *x)
 {
 	while (x->next)
 	{
-		if (x->value > x->next->value)
+		if (x->value < x->next->value)
 			return (0);
 		x = x->next;
 	}
@@ -65,8 +65,13 @@ t_stack	*find_smallest_node(t_stack *a)
 			min = temp->value;
 		temp = temp->next;
 	}
-	while (temp2->value == min)
-		temp2 = temp2->next;
+	while (temp2->value != min)
+	{
+		if (temp2->value == min)
+			return (temp2);
+		else
+			temp2 = temp2->next;
+	}
 	return (temp2);
 }
 
