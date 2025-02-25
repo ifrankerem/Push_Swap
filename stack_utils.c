@@ -6,7 +6,7 @@
 /*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 00:24:51 by iarslan           #+#    #+#             */
-/*   Updated: 2025/02/25 16:47:55 by iarslan          ###   ########.fr       */
+/*   Updated: 2025/02/25 17:18:00 by iarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,25 @@
 
 int	stack_sorted(t_stack *x)
 {
+	int		flag;
+	t_stack	*temp;
+
+	flag = 0;
+	temp = x;
 	while (x->next)
 	{
-		if (x->value < x->next->value)
-			return (0);
+		temp = x->next;
+		while (temp->next)
+		{
+			if (x->value < temp->value)
+				flag = 1;
+			else
+				flag = 0;
+			temp = temp->next;
+		}
 		x = x->next;
 	}
-	return (1);
+	return (flag);
 }
 
 void	three(t_stack **a)

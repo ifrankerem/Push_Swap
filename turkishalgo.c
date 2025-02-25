@@ -6,7 +6,7 @@
 /*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 01:25:02 by iarslan           #+#    #+#             */
-/*   Updated: 2025/02/25 16:38:22 by iarslan          ###   ########.fr       */
+/*   Updated: 2025/02/25 22:46:44 by iarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	target_node(t_stack *a, t_stack *b)
 	int		best_match;
 	t_stack	*a_current;
 
-	best_match = 2147483647;
-	a_current = a;
 	while (b)
 	{
+		best_match = 2147483647;
+		a_current = a;
 		while (a_current)
 		{
 			if ((b->value < a_current->value) && a_current->value < best_match)

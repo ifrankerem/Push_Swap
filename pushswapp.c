@@ -6,7 +6,7 @@
 /*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 02:36:24 by iarslan           #+#    #+#             */
-/*   Updated: 2025/02/25 16:41:16 by iarslan          ###   ########.fr       */
+/*   Updated: 2025/02/25 17:13:14 by iarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	pushswap(t_stack **a, t_stack **b)
 	t_stack	*a_smallest;
 
 	len_a = ft_lstsize2(*a);
-	if (stack_sorted(*a))
+	if (!(stack_sorted(*a)))
 	{
 		if (ft_lstsize2(*a) == 2)
 		{

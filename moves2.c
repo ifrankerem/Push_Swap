@@ -37,7 +37,6 @@ void	rrx(t_stack **a)
 
 	second_last = NULL;
 	last = *a;
-	second_last->next = NULL;
 	while (last->next)
 	{
 		second_last = last;
