@@ -6,7 +6,7 @@
 /*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 02:36:24 by iarslan           #+#    #+#             */
-/*   Updated: 2025/02/25 17:13:14 by iarslan          ###   ########.fr       */
+/*   Updated: 2025/02/27 01:20:45 by iarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	pushswap(t_stack **a, t_stack **b)
 			{
 				if (a_smallest->is_above == 1)
 				{
-					while (*a != a_smallest) // sorunlu
+					while (*a != a_smallest)
 						ra(a);
 				}
 				else if (a_smallest->is_above == 0)
@@ -57,5 +57,4 @@ void	pushswap(t_stack **a, t_stack **b)
 			}
 		}
 	}
-	exit(1);
 }

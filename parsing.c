@@ -6,7 +6,7 @@
 /*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 19:52:31 by iarslan           #+#    #+#             */
-/*   Updated: 2025/02/26 15:39:30 by iarslan          ###   ########.fr       */
+/*   Updated: 2025/02/26 17:06:04 by iarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	ft_args(t_stack **a, char *argv[])
 	len = 0;
 	while (argv[len])
 		len++;
+	if (len == 0)
+		ft_error(a);
 	number = 0;
 	while (len > 0)
 	{

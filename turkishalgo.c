@@ -6,7 +6,7 @@
 /*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 01:25:02 by iarslan           #+#    #+#             */
-/*   Updated: 2025/02/25 22:46:44 by iarslan          ###   ########.fr       */
+/*   Updated: 2025/02/27 01:20:37 by iarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	target_node(t_stack *a, t_stack *b)
 }
 
 void	set_current_pos(t_stack *root)
-// median hesabı nı .h dosyasının içindekine atcaz 1-0 diye
 {
-	int len;
-	int i;
+	int	len;
+	int	i;
+
 	len = ft_lstsize2(root);
 	i = 0;
 	while (root)
@@ -56,10 +56,9 @@ void	set_current_pos(t_stack *root)
 }
 
 void	set_price(t_stack *a, t_stack *b)
-// hem target node hem de b içindeki price ı hesaplama
 {
-	int len_a;
-	int len_b;
+	int	len_a;
+	int	len_b;
 
 	len_a = ft_lstsize2(a);
 	len_b = ft_lstsize2(b);
@@ -83,6 +82,8 @@ void	set_cheapest(t_stack *b)
 	int		best_match_value;
 	t_stack	*cheapest_node;
 
+	if (!b)
+		return ;
 	best_match_value = 2147483647;
 	cheapest_node = NULL;
 	while (b)
@@ -109,9 +110,9 @@ t_stack	*return_cheapest_node(t_stack *b)
 }
 
 void	move_nodes(t_stack **a, t_stack **b)
-// bu ucuz hamleye göre hamleleri yaptır.
 {
-	t_stack *cheapest;
+	t_stack	*cheapest;
+
 	cheapest = return_cheapest_node(*b);
 	if (cheapest->is_above && cheapest->target_node->is_above)
 		rotate_both(a, b, cheapest);
@@ -123,7 +124,6 @@ void	move_nodes(t_stack **a, t_stack **b)
 }
 
 void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
-// buda a'daki target node un ve b deki cheapest node un konumlarına göre aynı anda rotate edilebilir ise edilsin hamle azalsın diye yapılmıs bir fonksiyon ama above median için
 {
 	while (((*b) != cheapest_node) && (*a) != cheapest_node->target_node)
 		rr(a, b);
