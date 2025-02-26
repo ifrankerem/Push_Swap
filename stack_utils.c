@@ -6,31 +6,27 @@
 /*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 00:24:51 by iarslan           #+#    #+#             */
-/*   Updated: 2025/02/25 17:18:00 by iarslan          ###   ########.fr       */
+/*   Updated: 2025/02/26 15:46:12 by iarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int	stack_sorted(t_stack *x)
+int	stack_sorted(t_stack *stack)
 {
-	int		flag;
-	t_stack	*temp;
+	int	flag;
 
-	flag = 0;
-	temp = x;
-	while (x->next)
+	flag = 1;
+	if (!stack)
+		return (1);
+	while (stack->next)
 	{
-		temp = x->next;
-		while (temp->next)
+		if (stack->value > stack->next->value)
 		{
-			if (x->value < temp->value)
-				flag = 1;
-			else
-				flag = 0;
-			temp = temp->next;
+			flag = 0;
+			break ;
 		}
-		x = x->next;
+		stack = stack->next;
 	}
 	return (flag);
 }
