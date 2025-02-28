@@ -1,5 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/27 01:41:49 by iarslan           #+#    #+#             */
+/*   Updated: 2025/03/01 00:37:18 by iarslan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+
+# include "./libft/libft.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct node
 {
@@ -12,16 +29,12 @@ typedef struct node
 	int			is_cheapest;
 }				t_stack;
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
 void			ft_error(t_stack **stack);
 void			ft_free_stack(t_stack **stack);
 int				ft_atoi2(const char *nptr);
 int				error_syntax(char *x);
 int				check_duplicate(t_stack *a, int number);
-char			**split(char const *s, char c);
+char			**ft_split2(char const *s, char c);
 void			ft_args(t_stack **a, char *argv[]);
 void			ft_lstadd_front2(t_stack **lst, t_stack *new);
 t_stack			*ft_lstnew2(int content);
@@ -58,5 +71,6 @@ void			finish_rotation(t_stack **stack, t_stack *cheapest_node,
 					char stack_name);
 void			re_init_nodes(t_stack *a, t_stack *b);
 void			ft_lstadd_back2(t_stack **lst, t_stack *new);
+void			smallest_to_top(t_stack **a);
 
 #endif

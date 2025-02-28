@@ -6,11 +6,11 @@
 /*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 00:16:30 by iarslan           #+#    #+#             */
-/*   Updated: 2025/02/26 16:37:51 by iarslan          ###   ########.fr       */
+/*   Updated: 2025/02/27 17:50:32 by iarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pushswap.h"
+#include "push_swap.h"
 
 void	ft_error(t_stack **stack)
 {
@@ -31,6 +31,7 @@ void	ft_error(t_stack **stack)
 	*stack = NULL;
 	exit(1);
 }
+
 void	ft_free_stack(t_stack **stack)
 {
 	t_stack	*temp;
@@ -43,9 +44,14 @@ void	ft_free_stack(t_stack **stack)
 	}
 	*stack = NULL;
 }
+
 void	ft_free_argv(char **argv)
 {
-	int i = 0;
+	int	i;
+
+	if (!argv)
+		return ;
+	i = 0;
 	while (argv[i])
 	{
 		free(argv[i]);

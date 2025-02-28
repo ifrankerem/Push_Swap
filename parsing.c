@@ -6,11 +6,11 @@
 /*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 19:52:31 by iarslan           #+#    #+#             */
-/*   Updated: 2025/02/26 17:06:04 by iarslan          ###   ########.fr       */
+/*   Updated: 2025/03/01 00:52:07 by iarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pushswap.h"
+#include "push_swap.h"
 
 void	ft_args(t_stack **a, char *argv[])
 {
@@ -19,6 +19,8 @@ void	ft_args(t_stack **a, char *argv[])
 	t_stack	*node;
 
 	len = 0;
+	if (!argv || !argv[0])
+		ft_error(a);
 	while (argv[len])
 		len++;
 	if (len == 0)

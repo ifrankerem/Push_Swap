@@ -6,12 +6,12 @@
 /*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:50:26 by iarslan           #+#    #+#             */
-/*   Updated: 2025/02/26 17:02:41 by iarslan          ###   ########.fr       */
+/*   Updated: 2025/02/27 16:13:44 by iarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
-#include "pushswap.h"
+#include "push_swap.h"
 
 int	ft_atoi2(const char *nptr)
 {
@@ -45,7 +45,7 @@ int	error_syntax(char *x)
 
 	i = 0;
 	if ((x[i + 1] == '-' && x[i] == '-') || (x[i] == '+') || (x[i] == '-' && x[i
-			+ 1] == '\0') || (x[i] == '\0'))
+				+ 1] == '\0') || (x[i] == '\0'))
 		return (0);
 	if (x[i] == '-')
 		i++;
@@ -58,6 +58,7 @@ int	error_syntax(char *x)
 	}
 	return (1);
 }
+
 int	check_duplicate(t_stack *a, int number)
 {
 	if (!a)
@@ -69,43 +70,4 @@ int	check_duplicate(t_stack *a, int number)
 		a = a->next;
 	}
 	return (0);
-}
-t_stack	*ft_lstnew2(int content)
-{
-	t_stack	*node;
-
-	node = malloc(sizeof(t_stack));
-	if (!node)
-		return (NULL);
-	node->value = content;
-	node->next = NULL;
-	return (node);
-}
-void	ft_lstadd_front2(t_stack **lst, t_stack *new)
-{
-	if (!new)
-		return ;
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
-	new->next = *lst;
-	*lst = new;
-}
-void	ft_lstadd_back2(t_stack **lst, t_stack *new)
-{
-	t_stack	*current;
-
-	if (!new || !lst)
-		return ;
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
-	current = *lst;
-	while (current->next)
-		current = current->next;
-	current->next = new;
 }
