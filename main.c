@@ -6,7 +6,7 @@
 /*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 00:16:43 by iarslan           #+#    #+#             */
-/*   Updated: 2025/03/01 15:45:55 by iarslan          ###   ########.fr       */
+/*   Updated: 2025/03/01 18:37:40 by iarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	main(int argc, char *argv[])
 		ft_args(&a, argv);
 		ft_free_argv(argv);
 	}
-	ft_args(&a, argv + 1);
+	else
+		ft_args(&a, argv + 1);
 	if (!stack_sorted(a))
 	{
 		if (ft_lstsize2(a) == 2)
@@ -37,6 +38,5 @@ int	main(int argc, char *argv[])
 		else
 			pushswap(&a, &b);
 	}
-	ft_free_stack(&a);
-	return (0);
+	return (ft_free_stack(&a), 0);
 }

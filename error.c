@@ -6,7 +6,7 @@
 /*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 00:16:30 by iarslan           #+#    #+#             */
-/*   Updated: 2025/02/27 17:50:32 by iarslan          ###   ########.fr       */
+/*   Updated: 2025/03/01 18:20:51 by iarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_error(t_stack **stack)
 	if (!stack || !(*stack))
 	{
 		write(2, "Error\n", 6);
-		exit(1);
+		return ;
 	}
 	while (*stack)
 	{
@@ -29,7 +29,7 @@ void	ft_error(t_stack **stack)
 	}
 	write(2, "Error\n", 6);
 	*stack = NULL;
-	exit(1);
+	return ;
 }
 
 void	ft_free_stack(t_stack **stack)

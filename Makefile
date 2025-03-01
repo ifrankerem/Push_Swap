@@ -5,7 +5,7 @@ SRCS = error.c main.c pushmoves.c reverserotatemoves.c rotatemoves.c swapmoves.c
 LIBFT		= libft/libft.a
 DIR_LIBFT	= libft
 CC = cc
-CFLAGS =  -Wall -Wextra -Werror 
+CFLAGS = -g -Wall -Wextra -Werror 
 
 all: $(NAME)
 
