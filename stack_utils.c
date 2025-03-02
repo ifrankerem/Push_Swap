@@ -6,7 +6,7 @@
 /*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 00:24:51 by iarslan           #+#    #+#             */
-/*   Updated: 2025/03/01 00:40:24 by iarslan          ###   ########.fr       */
+/*   Updated: 2025/03/02 03:41:19 by iarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int	find_biggest(t_stack *a)
 t_stack	*find_smallest_node(t_stack *a)
 {
 	t_stack	*temp;
-	int		min;
 	t_stack	*temp2;
+	int		min;
 
 	temp2 = a;
 	min = a->value;
@@ -75,7 +75,7 @@ t_stack	*find_smallest_node(t_stack *a)
 			min = temp->value;
 		temp = temp->next;
 	}
-	while (temp2->value != min)
+	while (temp2)
 	{
 		if (temp2->value == min)
 			return (temp2);

@@ -6,14 +6,14 @@
 /*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:50:26 by iarslan           #+#    #+#             */
-/*   Updated: 2025/02/27 16:13:44 by iarslan          ###   ########.fr       */
+/*   Updated: 2025/03/02 04:04:22 by iarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "push_swap.h"
 
-int	ft_atoi2(const char *nptr)
+int	ft_atoi2(const char *nptr, t_stack **stack, char *argv[], int use_split)
 {
 	long	sign;
 	long	number;
@@ -32,7 +32,7 @@ int	ft_atoi2(const char *nptr)
 	{
 		number = number * 10 + (*nptr - 48);
 		if ((number * sign) < -2147483648 || (number * sign) > 2147483647)
-			ft_error(NULL);
+			ft_error(stack, argv, use_split);
 		nptr++;
 	}
 	number = number * sign;
@@ -45,7 +45,8 @@ int	error_syntax(char *x)
 
 	i = 0;
 	if ((x[i + 1] == '-' && x[i] == '-') || (x[i] == '+') || (x[i] == '-' && x[i
-				+ 1] == '\0') || (x[i] == '\0'))
+				+ 1] == '\0') || (x[i] == '-' && x[i + 1] == '0')
+		|| (x[i] == '+' && x[i + 1] == '0'))
 		return (0);
 	if (x[i] == '-')
 		i++;

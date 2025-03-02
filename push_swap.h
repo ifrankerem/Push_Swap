@@ -6,7 +6,7 @@
 /*   By: iarslan <iarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 01:41:49 by iarslan           #+#    #+#             */
-/*   Updated: 2025/03/01 00:37:18 by iarslan          ###   ########.fr       */
+/*   Updated: 2025/03/02 03:15:22 by iarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ typedef struct node
 	int			is_cheapest;
 }				t_stack;
 
-void			ft_error(t_stack **stack);
+void			ft_error(t_stack **stack, char **argv, int use_split);
 void			ft_free_stack(t_stack **stack);
-int				ft_atoi2(const char *nptr);
 int				error_syntax(char *x);
 int				check_duplicate(t_stack *a, int number);
-char			**ft_split2(char const *s, char c);
-void			ft_args(t_stack **a, char *argv[]);
+int				ft_atoi2(const char *nptr, t_stack **stack, char *argv[],
+					int use_split);
+void			ft_args(t_stack **a, char *argv[], int use_split);
 void			ft_lstadd_front2(t_stack **lst, t_stack *new);
 t_stack			*ft_lstnew2(int content);
 void			ft_free_argv(char **argv);
