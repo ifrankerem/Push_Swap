@@ -136,34 +136,9 @@
 
   ---
 
-  ## 🧩 Bonus Part — The Checker
-
-  The **checker** program (bonus) reads instructions from standard input, executes them,  
-  and verifies whether the stacks end up sorted correctly.
-
-  Example:
-  ```bash
-  ./checker 3 2 1 0
-  rra
-  pb
-  sa
-  rra
-  pa
-  # Output → OK
-  ```
-
-  It displays:
-  - `OK` → if stack `a` is sorted and `b` is empty  
-  - `KO` → if not sorted  
-  - `Error` → invalid input or command  
-
-  The checker ensures your `push_swap` solution truly sorts the data properly.
-
-  ---
-
   ## 🧮 Example Visualization
 
-  ![Push Swap Example](https://upload.wikimedia.org/wikipedia/commons/4/43/Sorting_algorithms_anim.gif)
+  ![Push Swap Example](./assets/algo.gif)
 
   *(Visualization: Sorting steps represented as swaps and rotations)*
 
