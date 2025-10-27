@@ -135,7 +135,7 @@
   Each operation is printed in sequence, separated by newlines.
   ---
 
-  ## 🔴 [YouTube Video]
+  ## 🔴 YouTube Video
   Here are walkthrough and demo videos explaining the project structure, algorithm, and runtime behavior.
 
   ▶️ **Project Overview:**
