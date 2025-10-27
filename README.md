@@ -1,4 +1,4 @@
-  # 🔁 Push_swap  
+<img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/4854dfe9-57cc-461f-bac0-69b35663c342" />  # 🔁 Push_swap  
   **"Because Swap_push doesn’t feel as natural." — developed by [@ifrankerem](https://github.com/ifrankerem)**  
 
   Push_swap is a sorting algorithm project written in **C**, part of the **42 curriculum**.  
@@ -135,11 +135,10 @@
   Each operation is printed in sequence, separated by newlines.
   ---
 
-  ## 🔴 YouTube Video
-  Here are walkthrough and demo videos explaining the project structure, algorithm, and runtime behavior.
+  ## 🎥 Project Demo
+  Check out the full video demonstration on YouTube 👇  
+  ▶️ [Watch on YouTube](https://www.youtube.com/watch?v=w3of0xvm7Ck)
 
-  ▶️ **Project Overview:**
-  [https://www.youtube.com/watch?v=rY4tZnFEBo8](https://www.youtube.com/watch?v=rY4tZnFEBo8)
   
   ---
 
