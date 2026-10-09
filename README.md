@@ -1,171 +1,169 @@
-  # 🔁 Push_swap  
-  **"Because Swap_push doesn’t feel as natural." — developed by [@ifrankerem](https://github.com/ifrankerem)**  
+<div align="center">
 
-  Push_swap is a sorting algorithm project written in **C**, part of the **42 curriculum**.  
-  The goal is to sort a stack of integers using a **limited set of stack operations**, with the smallest possible number of moves.  
+# 🔁 push_swap
 
-  It’s a challenging mix of **algorithm design**, **complexity analysis**, and **low-level optimization**, testing both your problem-solving and C programming skills.
+**Sort a stack of integers using a tiny instruction set — and as few moves as possible.**
 
-  ---
+![Language](https://img.shields.io/badge/language-C-00599C?style=flat-square)
+![42](https://img.shields.io/badge/42-Common%20Core-000000?style=flat-square)
+![Topic](https://img.shields.io/badge/algorithms-%2B%20complexity-8A2BE2?style=flat-square)
+![Norminette](https://img.shields.io/badge/norm-42%20standard-2b9348?style=flat-square)
+![Stars](https://img.shields.io/github/stars/ifrankerem/Push_Swap?style=flat-square)
 
-  ## 🧩 Overview
+</div>
 
-  You are given two stacks — `a` and `b`.  
-  - Stack **a** initially contains a random sequence of integers (positive or negative).  
-  - Stack **b** is empty.  
-  - Your task is to **sort stack a** in ascending order using a predefined set of operations.
+---
 
-  You can only use the following operations:
+## 📋 Table of Contents
 
-  | Operation | Description |
-  |------------|-------------|
-  | `sa` | Swap the top two elements of stack a |
-  | `sb` | Swap the top two elements of stack b |
-  | `ss` | Perform `sa` and `sb` simultaneously |
-  | `pa` | Push the top element of b onto a |
-  | `pb` | Push the top element of a onto b |
-  | `ra` | Rotate a upward (first element becomes last) |
-  | `rb` | Rotate b upward (first element becomes last) |
-  | `rr` | Perform `ra` and `rb` simultaneously |
-  | `rra` | Reverse rotate a (last element becomes first) |
-  | `rrb` | Reverse rotate b (last element becomes first) |
-  | `rrr` | Perform `rra` and `rrb` simultaneously |
+- [About](#about)
+- [The Instruction Set](#the-instruction-set)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Algorithm](#algorithm)
+- [Benchmarks](#benchmarks)
+- [Project Layout](#project-layout)
+- [Design Notes](#design-notes)
+- [Demo](#demo)
+- [Author](#author)
 
-  ---
+---
 
-  ## ⚙️ How It Works
+## 📖 About
 
-  The **push_swap** program:
-  - Takes a list of integers as arguments  
-  - Calculates the **shortest possible sequence** of operations to sort them  
-  - Prints the sequence to standard output  
+**push_swap** takes two stacks — `a` (holding a shuffled list of integers) and
+an empty `b` — and prints the shortest sequence of stack operations that
+leaves `a` sorted in ascending order.
 
-  Example:
-  ```bash
-  ./push_swap 2 1 3 6 5 8
-  sa
-  pb
-  pb
-  pb
-  sa
-  pa
-  pa
-  pa
-  ```
+It's the 42 project that turns data-structure manipulation into an optimisation
+problem: the grading is not "is it sorted" but "how many moves did it cost".
 
-  Error handling:
-  ```bash
-  ./push_swap 0 one 2 3
-  Error
-  ```
+---
 
-  ---
+## 🔧 The Instruction Set
 
-  ## 🚀 Running the Project
+| Operation | Effect |
+|---|---|
+| `sa` | swap the top two of `a` |
+| `sb` | swap the top two of `b` |
+| `ss` | `sa` and `sb` together |
+| `pa` | push the top of `b` onto `a` |
+| `pb` | push the top of `a` onto `b` |
+| `ra` | rotate `a` up (first becomes last) |
+| `rb` | rotate `b` up |
+| `rr` | `ra` and `rb` together |
+| `rra` | reverse rotate `a` |
+| `rrb` | reverse rotate `b` |
+| `rrr` | `rra` and `rrb` together |
 
-  ### 1️⃣ Clone the repository
-  ```bash
-  git clone https://github.com/ifrankerem/push_swap.git
-  cd push_swap
-  ```
+---
 
-  ### 2️⃣ Build
-  ```bash
-  make
-  ```
+## 🚀 Getting Started
 
-  ### 3️⃣ Run
-  ```bash
-  ./push_swap <numbers>
-  ```
+**Prerequisites**
 
-  Example:
-  ```bash
-  ./push_swap 4 67 3 87 23
-  ```
+- `gcc` or `clang`
+- `make`
 
-  You can test your output using the **checker** program:
-  ```bash
-  ARG="4 67 3 87 23"
-  ./push_swap $ARG | ./checker_OS $ARG
-  # Output → OK or KO
-  ```
+**Build**
 
-  ---
+```sh
+git clone https://github.com/ifrankerem/Push_Swap.git
+cd Push_Swap
+make
+```
 
-  ## 📈 Benchmarks
+---
 
-  To get a perfect score:
-  - ✅ Sort **100 numbers** in fewer than **700 operations**  
-  - ✅ Sort **500 numbers** in fewer than **5500 operations**
+## 💻 Usage
 
-  Minimum passing thresholds (≈80%):
-  - 100 numbers < 1100 ops  
-  - 500 numbers < 8500 ops  
+```sh
+ARG="4 67 3 87 23"
+./push_swap $ARG          # prints the operation list
+./push_swap $ARG | ./checker_OS $ARG     # prints OK or KO
+```
 
-  The project is graded based on the **efficiency** and **accuracy** of your sorting algorithm.
+Invalid input prints `Error`:
 
-  ---
+```sh
+$ ./push_swap 0 one 2 3
+Error
+```
 
-  ## 🧠 Algorithmic Approach
+---
 
-  To achieve optimal results, this project requires balancing between algorithmic complexity and move count.  
-  Common strategies used:
-  - **Index mapping** (normalization of input values)
-  - **Radix sort** for large datasets (non-comparison-based)
-  - **Insertion or selection sort** for smaller stacks
-  - **Recursive partitioning** of stack values
-  - **Adaptive rotation patterns** to minimize moves
+## 🧠 Algorithm
 
-  The challenge is to find the **sweet spot** between simplicity and efficiency — especially for mid-sized datasets where Radix and chunk-based methods overlap.
+The move count is what's being optimised, so the strategy branches on input
+size:
 
-  ---
+- **Small stacks** — insertion sort and hardcoded optimal sequences for 3 and
+  5 elements.
+- **Large stacks** — index normalisation then a chunked or radix-style sort over
+  the normalised values, using least moves to place each element.
 
-  ## 💬 Example Output
+Chunks are chosen so every candidate moves the same distance, which is what
+keeps the move count near the theoretical floor instead of exploding with
+input size.
 
-  ```
-  0 sa
-  1 pb
-  2 pb
-  3 sa
-  4 pa
-  5 pa
-  ```
+---
 
-  Each operation is printed in sequence, separated by newlines.
-  ---
+## 📊 Benchmarks
 
-  ## 🎥 Project Demo
-  Check out the full video demonstration on YouTube 👇  
-  ▶️ [Watch on YouTube](https://www.youtube.com/watch?v=rY4tZnFEBo8)
+| Input size | Full marks | Passing threshold |
+|---|---|---|
+| 100 numbers | < 700 moves | < 1100 moves |
+| 500 numbers | < 5500 moves | < 8500 moves |
 
-  
-  ---
+---
 
-  ## 🧮 Example Visualization
+## 🗂 Project Layout
 
-  ![Push Swap Example](./assets/algo.gif)
+```
+Push_Swap/
+├── main.c / parsing.c / error.c     # argument handling and validation
+├── algo.c / algo2.c                # strategy selection and sorting
+├── pushmoves.c / swapmoves.c        # push and swap operations
+├── rotatemoves.c / reversorotatemoves.c
+├── stack_utils.c / stack_utils2.c   # stack helpers
+├── utils.c
+├── libft/
+└── assets/                          # visualisation
+```
 
-  *(Visualization: Sorting steps represented as swaps and rotations)*
+---
 
-  ---
+## 🧠 Design Notes
 
-  ## 💡 Key Takeaways
+- Arguments are validated for syntax, duplicates and `int` range before any
+  allocation.
+- Values are normalised to `0..n-1` so comparison-based logic doesn't care
+  about magnitude, only rank.
+- Cost is computed as rotation distance plus insertion cost, which is what the
+  move-minimiser actually optimises.
+- Built with the 42 flags, `-Wall -Wextra -Werror`, Norminette-clean.
 
-  - Deep understanding of **stack operations** and **data manipulation**
-  - Hands-on with **time complexity** and **optimization**
-  - Practical use of **C memory management** (`malloc`, `free`)
-  - Ensuring **no memory leaks** or undefined behavior
-  - Clean modular design following **Norminette** standards
+---
 
-  ---
+## 🎥 Demo
 
-  ## 📜 License
+▶️ [Watch on YouTube](https://www.youtube.com/watch?v=rY4tZnFEBo8)
 
-  This project was developed as part of the **42 School curriculum**.  
-  It is meant for **educational and portfolio purposes** only.  
-  Please do not reuse it for submission or grading.
+---
 
-  ---
+## 👤 Author
 
-  🧑‍💻 *Developed with precision and care by [@ifrankerem](https://github.com/ifrankerem)*
+**İrfan Kerem Arslan** — [@ifrankerem](https://github.com/ifrankerem)
+
+---
+
+## 📄 License
+
+Built for the **42 Common Core** curriculum. Shared for learning and portfolio
+purposes.
+
+---
+
+## 🙏 Acknowledgements
+
+- [awesome-readme](https://github.com/matiassingers/awesome-readme) — structure inspiration for this README
